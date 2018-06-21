@@ -32,6 +32,7 @@ framework:
         log: true
     templating:
         engines: ['twig']
+    translator: { fallbacks: ["%locale%"] }
 
 # Twig Configuration
 twig:
@@ -54,11 +55,18 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #path: '%database_path%'
+        types:
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        entity_managers:
+            default:
+                mappings:
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
 
 stof_doctrine_extensions:
     default_locale: de_DE
@@ -85,8 +93,23 @@ swiftmailer:
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: AppBundle\Entity\User
+    user_class: Sonata\UserBundle\Entity\BaseUser
+    group:
+        group_class:   Sonata\UserBundle\Entity\BaseGroup
+        group_manager: sonata.user.orm.group_manager # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+    service:
+        user_manager: sonata.user.orm.user_manager
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+
+sonata_block:
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
 
