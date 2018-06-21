@@ -8,6 +8,7 @@ require "#{dir}/puphpet/ruby/to_bool.rb"
 
 configValues = YAML.load_file("#{dir}/puphpet/config.yaml")
 
+
 provider = ENV['VAGRANT_DEFAULT_PROVIDER'] ? ENV['VAGRANT_DEFAULT_PROVIDER'] : 'local'
 if File.file?("#{dir}/puphpet/config-#{provider}.yaml")
   custom = YAML.load_file("#{dir}/puphpet/config-#{provider}.yaml")
