@@ -36,8 +36,6 @@
         var layer_markers;
 
         function drawmap() {
-            // Popup und Popuptext mit evtl. Grafik
-            var popuptext="<p style='color: black; '>TEST</p>";
 
             OpenLayers.Lang.setCode('de');
 
@@ -68,8 +66,11 @@
             map.addLayers([layer_mapnik, layer_markers]);
             jumpTo(lon, lat, zoom);
 
-            // Position des Markers
-            //addMarker(layer_markers, 6.641389, 49.756667, popuptext);
+            var popuptext = "";
+            {% for location in locations %}
+                popuptext="<p style='color: black; '>{{ location.name }}</p>";
+                addMarker(layer_markers, {{ location.longitude }}, {{ location.latitude }}, popuptext);
+            {% endfor %}
 
         }
 
