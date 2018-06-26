@@ -1,0 +1,30 @@
+AppBundle\Entity\Location:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\LocationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        street:
+            type: string
+            length: 255
+        zip:
+            type: string
+            length: 255
+        city:
+            type: string
+            length: 255
+        latitude:
+            type: string
+            length: 255
+        longitude:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

@@ -1,0 +1,7 @@
+services:
+    app.admin.location:
+        class: AppBundle\Admin\LocationAdmin
+        arguments: [~, AppBundle\Entity\Location, AppBundle:LocationAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Location }
+        public: true
